@@ -1,0 +1,2048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Korea & Japan | An Autumn Glow Journey</title>
+    <style>
+        /* Premium Font Pairing: Cormorant Garamond (Serif), Montserrat (Sans) & Caveat (Handwritten) */
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap');
+
+        :root {
+            --bg-ivory: #fdfcf9;
+            --text-onyx: #1a1a1a;
+            --accent-gold: #b3915c;
+            --accent-gold-light: #d4c1a1;
+            --text-muted: #6b6b6b;
+            --border-soft: rgba(0,0,0,0.06);
+            --transition-luxe: 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+            
+            /* Extracted Ukiyo-e Palette */
+            --ukiyo-red: #c54b4b;
+            --ukiyo-green: #9fb2a2;
+            
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'Montserrat', sans-serif;
+            --font-hand: 'Caveat', cursive;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            list-style: none;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-ivory);
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-onyx);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            /* Base Ivory Texture */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M50 0 L100 50 L50 100 L0 50 Z' fill='none' stroke='%23b3915c' stroke-opacity='0.03' stroke-width='0.5'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+        }
+
+        /* Language Toggle Visibility Logic */
+        [lang="tr"] { display: none !important; }
+        body.lang-tr [lang="en"] { display: none !important; }
+        body.lang-tr [lang="tr"] { display: block !important; }
+        
+        body.lang-tr .nav-links a[lang="tr"] { display: inline-block !important; }
+        body.lang-tr .cta-btn[lang="tr"], body.lang-tr .btn-apply[lang="tr"] { display: inline-block !important; }
+        
+        /* Fix for accordion flex layout in Turkish */
+        body.lang-tr button.accordion-trigger[lang="tr"] { display: flex !important; }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            font-weight: 500;
+            line-height: 1.1;
+            text-transform: none;
+        }
+
+        .section-title {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            text-align: center;
+            margin-top: 1.5rem;
+            margin-bottom: 2.5rem;
+            letter-spacing: -0.01em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-intro {
+            max-width: 800px;
+            margin: 0 auto 4rem; /* Reduced from 5rem */
+            text-align: center;
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            font-weight: 300;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 2.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: var(--transition-luxe);
+        }
+
+        nav.scrolled {
+            padding: 1.2rem 5%;
+            background: rgba(253, 252, 249, 0.98);
+            border-bottom: 1px solid var(--border-soft);
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .logo-text {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            letter-spacing: 2px;
+            font-weight: 500;
+            color: white;
+            transition: color 0.5s ease;
+        }
+
+        .logo-signature {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: -16px;
+            margin-left: 0px;
+        }
+
+        .logo-handwritten {
+            font-family: var(--font-hand);
+            font-size: 1.4rem;
+            color: var(--accent-gold-light);
+            transition: color 0.5s ease;
+        }
+
+        nav.scrolled .logo-text { color: var(--text-onyx); }
+        nav.scrolled .logo-handwritten { color: var(--accent-gold); }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .nav-links { display: flex; align-items: center; gap: 2.5rem; }
+
+        .nav-links a {
+            color: white;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav.scrolled .nav-links a { color: var(--text-onyx); }
+        .nav-links a:hover { color: var(--accent-gold) !important; }
+
+        .lang-selector-wrap {
+            position: relative;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: white;
+            letter-spacing: 1px;
+            padding: 10px 0;
+        }
+
+        nav.scrolled .lang-selector-wrap { color: var(--text-onyx); }
+
+        .lang-current {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .lang-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid var(--border-soft);
+            padding: 15px 25px;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            z-index: 1001;
+            margin-top: -5px; 
+        }
+
+        .lang-selector-wrap:hover .lang-dropdown { display: flex; }
+
+        .lang-option {
+            color: var(--text-muted);
+            transition: color 0.3s;
+            font-size: 0.85rem;
+        }
+        .lang-option:hover { color: var(--accent-gold); }
+        .lang-option.active { color: var(--text-onyx); font-weight: 600; }
+
+        .btn-apply {
+            padding: 0.8rem 2.2rem;
+            border: 1px solid white;
+            border-radius: 0;
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            white-space: nowrap;
+        }
+
+        nav.scrolled .btn-apply { border-color: var(--text-onyx); }
+        
+        .btn-apply:hover { 
+            background: white; 
+            color: var(--text-onyx) !important; 
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255,255,255,0.15);
+        }
+        nav.scrolled .btn-apply:hover { 
+            background: var(--text-onyx); 
+            color: white !important; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 1100;
+            padding: 10px;
+        }
+
+        .mobile-toggle span {
+            display: block;
+            width: 25px;
+            height: 1px;
+            background: white;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+
+        nav.scrolled .mobile-toggle span { background: var(--text-onyx); }
+
+        /* --- HERO --- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+            padding-bottom: 10vh;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background-image: url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.05);
+            transition: transform 10s linear;
+        }
+        
+        .hero:hover .hero-bg { transform: scale(1); }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.6) 100%);
+            z-index: 0;
+        }
+
+        .hero-content { position: relative; z-index: 1; padding: 0 20px; }
+
+        .hero h1 { 
+            font-size: clamp(5rem, 12vw, 9.5rem);
+            margin-bottom: 0.2rem;
+            color: var(--accent-gold-light);
+            text-shadow: 0 15px 40px rgba(0,0,0,0.6), 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        .hero-subtitle { 
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.85);
+            letter-spacing: -0.01em;
+        }
+
+        .hero-date {
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            margin-bottom: 3.5rem;
+            opacity: 0.9;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            line-height: 2;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1.1rem 2.8rem;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.7);
+            color: white;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            border-radius: 0;
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            min-width: 250px;
+        }
+
+        .cta-btn:hover {
+            background: white;
+            color: var(--text-onyx);
+            border-color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255,255,255,0.2);
+        }
+
+        /* --- EDITORIAL STORY --- */
+        .hosts-section {
+            padding: 7rem 8%; /* Reduced from 10rem */
+            background: white;
+            position: relative;
+        }
+
+        /* Subtle Momiji Watermark on Light Sections */
+        .hosts-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0; right: 0;
+            width: 600px; height: 600px;
+            background-image: url('momiji.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.04;
+            mix-blend-mode: multiply;
+            pointer-events: none;
+            z-index: 0;
+            border-top-left-radius: 100%;
+        }
+
+        .hosts-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem; /* Reduced from 8rem */
+            align-items: center;
+            max-width: 1500px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hosts-image {
+            position: relative;
+        }
+
+        .hosts-image img {
+            width: 100%;
+            height: 700px;
+            object-fit: cover;
+            border-radius: 2px;
+            display: block;
+        }
+        
+        .hosts-image::before {
+            content: '';
+            position: absolute;
+            top: -30px; left: -30px; width: 100%; height: 100%;
+            border: 1px solid var(--accent-gold);
+            z-index: -1;
+            transition: var(--transition-luxe);
+            opacity: 0.6;
+        }
+        
+        .hosts-section:hover .hosts-image::before { transform: translate(15px, 15px); opacity: 1; }
+
+        .hosts-content h3 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 2rem; color: var(--text-onyx); }
+        .hosts-content p { color: var(--text-muted); margin-bottom: 2rem; font-size: 1.05rem; line-height: 1.8; font-weight: 300; }
+        
+        .bio-link {
+            color: #7a7a7a; 
+            font-weight: 600;
+            border-bottom: 1px solid var(--accent-gold-light);
+            transition: color 0.3s, border-color 0.3s;
+        }
+        .bio-link:hover { 
+            color: var(--accent-gold); 
+            border-bottom-color: var(--accent-gold);
+        }
+
+        /* --- PATTERN VARIATIONS --- */
+        .pattern-waves {
+            background-color: #0d0d0d;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='50' viewBox='0 0 100 50'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.08' stroke-width='1'%3E%3Cpath d='M-25 50a25 25 0 0 1 50 0M-15 50a15 25 0 0 1 30 0M-5 50a5 5 0 0 1 10 0M25 50a25 25 0 0 1 50 0M35 50a15 15 0 0 1 30 0M45 50a5 5 0 0 1 10 0M75 50a25 25 0 0 1 50 0M85 50a15 15 0 0 1 30 0M95 50a5 5 0 0 1 10 0M0 25a25 25 0 0 1 50 0M10 25a15 15 0 0 1 30 0M20 25a5 5 0 0 1 10 0M50 25a25 25 0 0 1 50 0M60 25a15 15 0 0 1 30 0M70 25a5 5 0 0 1 10 0'/%3E%3C/g%3E%3C/svg%3E");
+            background-repeat: repeat;
+            color: white;
+            padding: 7rem 5%; /* Reduced from 10rem */
+        }
+
+        .pattern-hemp {
+            background-color: #0d0d0d;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='104' viewBox='0 0 60 104'%3E%3Cpath d='M30 104V78m0-52V0M0 52l15 26 15 26m0-104L15 26 0 52m60 0L45 78 30 104m0-104L45 26 60 52M0 52h30m30 0H30M15 26h30m0 52H15' stroke='%23ffffff' stroke-opacity='0.08' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            color: white;
+            padding: 7rem 5%; /* Reduced from 10rem */
+        }
+
+        .philosophy-text {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+            font-weight: 300;
+            line-height: 1.3;
+        }
+
+        /* --- MAP & ITINERARY --- */
+        .itinerary-section { padding: 7rem 5%; position: relative; } /* Reduced from 10rem */
+
+        /* Subtle Momiji Background Behind Section Titles */
+        .itinerary-decor {
+            position: absolute;
+            top: -2rem; left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 1200px;
+            height: 700px;
+            background-image: url('momiji.jpg');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            opacity: 0.12;
+            pointer-events: none;
+            z-index: 0;
+            mix-blend-mode: multiply;
+            -webkit-mask-image: radial-gradient(closest-side, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%);
+            mask-image: radial-gradient(closest-side, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%);
+        }
+
+        .map-wrapper {
+            max-width: 1200px;
+            margin: 0 auto 7rem; /* Reduced from 10rem */
+            padding: 2rem 0;
+            background: transparent;
+            border: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .map-svg { width: 100%; height: auto; }
+
+        .city-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem; /* Reduced from 10rem */
+            margin-bottom: 8rem; /* Reduced from 12rem */
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .city-grid:nth-child(even) { direction: rtl; }
+        .city-grid:nth-child(even) .city-info { direction: ltr; }
+
+        .city-visual {
+            position: relative;
+            height: 700px;
+        }
+
+        .city-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0;
+            display: block;
+        }
+
+        .city-visual::before {
+            content: '';
+            position: absolute;
+            top: -30px; left: -30px; width: 100%; height: 100%;
+            border: 1px solid var(--accent-gold);
+            z-index: -1;
+            transition: var(--transition-luxe);
+            opacity: 0.6;
+        }
+
+        .city-grid:hover .city-visual::before { transform: translate(15px, 15px); opacity: 1; }
+
+        .city-info .day-tag { 
+            font-size: 0.85rem; 
+            letter-spacing: 3px; 
+            color: var(--accent-gold); 
+            margin-bottom: 1.5rem; 
+            display: block; 
+            font-weight: 600; 
+            text-transform: uppercase;
+        }
+
+        .city-info h3 { font-size: 4.5rem; margin-bottom: 2rem; }
+        .city-info p { font-size: 1.2rem; color: var(--text-muted); font-weight: 300; }
+
+        /* --- PILLARS --- */
+        .pillar-card {
+            display: flex;
+            gap: 4rem; /* Reduced from 5rem */
+            align-items: center;
+            margin-bottom: 7rem; /* Reduced from 10rem */
+        }
+
+        .pillar-card:nth-child(odd) { flex-direction: row-reverse; }
+
+        .pillar-img { width: 50%; height: 600px; object-fit: cover; }
+        .pillar-text { width: 50%; padding: 0 5%; }
+        .pillar-text h3 { font-size: 3.5rem; margin-bottom: 1.5rem; color: white; }
+
+        .pillar-text .tag {
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            display: block;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* --- INDIVIDUAL PATHS --- */
+        .paths-section { padding: 7rem 8%; background: white; position: relative; }
+
+        .paths-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem; /* Reduced from 5rem */
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .path-column {
+            padding: 3rem;
+            position: relative;
+            background: white;
+            z-index: 1;
+        }
+
+        /* Center-aligned decorative frame by default */
+        .path-column::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border: 1px solid var(--accent-gold);
+            z-index: -1;
+            transition: var(--transition-luxe);
+            opacity: 0.4;
+            transform: translate(0, 0); 
+        }
+
+        .path-column:hover::before { 
+            transform: translate(-15px, -15px); 
+            opacity: 1; 
+            border-color: var(--accent-gold-light); 
+        }
+
+        .path-label {
+            display: block;
+            text-align: center;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .path-lead {
+            display: block;
+            text-align: center;
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            font-weight: 400;
+        }
+
+        .path-column h3 { font-size: 3.5rem; margin-bottom: 0.5rem; text-align: center; }
+
+        .path-collage {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            grid-template-rows: repeat(2, 220px);
+            gap: 1rem;
+            margin-bottom: 4rem;
+        }
+
+        .path-collage img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 2px;
+            filter: saturate(0.9);
+            transition: filter 0.6s ease;
+            background: #eee;
+        }
+        
+        .path-collage img:hover { filter: saturate(1.1); }
+
+        .path-collage .main-feat { grid-row: span 2; }
+
+        .benefit {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .benefit-icon {
+            width: 32px; height: 32px; stroke: var(--accent-gold); fill: none; flex-shrink: 0;
+        }
+
+        .benefit h4 { font-family: var(--font-body); font-size: 1rem; letter-spacing: 1px; margin-bottom: 0.5rem; font-weight: 600; }
+        .benefit p { color: var(--text-muted); font-weight: 300; font-size: 0.95rem; line-height: 1.5; }
+
+        /* --- RHYTHM --- */
+        .rhythm-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .rhythm-item {
+            padding: 5rem 3rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            transition: all 0.5s ease;
+        }
+
+        .rhythm-item:hover { background: rgba(255,255,255,0.03); border-color: var(--accent-gold); }
+        .rhythm-item svg { width: 50px; height: 50px; stroke: var(--accent-gold); fill: none; stroke-width: 1.5; margin-bottom: 2rem; }
+        .rhythm-item h3 { font-size: 2.2rem; margin-bottom: 1.5rem; color: var(--accent-gold-light); }
+        .rhythm-item p { font-weight: 300; opacity: 0.8; font-size: 0.95rem; }
+
+        /* --- SANCTUARIES (CAROUSEL) --- */
+        .sanctuaries-section {
+            padding: 7rem 0 4rem; /* Adjusted Spacing */
+            background: var(--bg-ivory);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sanctuaries-section .section-title,
+        .sanctuaries-section .section-intro {
+            padding: 0 5%;
+        }
+
+        .carousel-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            padding: 2rem 0;
+            margin-top: 2rem;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none;  /* IE and Edge */
+            cursor: grab;
+        }
+        
+        .carousel-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .carousel-wrapper:active {
+            cursor: grabbing;
+        }
+
+        .carousel-track {
+            display: flex;
+            width: max-content;
+            gap: 2.5rem;
+            padding: 0 2.5rem; /* Symmetrical padding */
+        }
+
+        .carousel-group {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .hotel-card {
+            width: 400px;
+            height: 500px;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+            display: block;
+        }
+
+        .hotel-card img { width: 100%; height: 100%; object-fit: cover; transition: 1.5s; filter: grayscale(20%); }
+        
+        .hotel-overlay-info {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%;
+            padding: 3rem 2rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            transform: translateY(20px);
+            transition: 0.5s;
+        }
+
+        .hotel-card:hover img { transform: scale(1.1); filter: grayscale(0%); }
+        .hotel-card:hover .hotel-overlay-info { transform: translateY(0); }
+        .hotel-overlay-info h4 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .hotel-overlay-info p { font-size: 0.8rem; letter-spacing: 2px; opacity: 0.7; }
+
+        /* --- ACCORDION (BRIGHT THEME) --- */
+        .program-section {
+            background-color: var(--bg-ivory);
+            padding: 5rem 5% 7rem; /* Adjusted Spacing */
+            position: relative;
+        }
+        
+        .accordion { max-width: 1000px; margin: 0 auto; }
+        
+        .accordion-item { border-bottom: 1px solid var(--border-soft); }
+        
+        .accordion-trigger {
+            width: 100%;
+            padding: 2.5rem 0;
+            background: none;
+            border: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--text-onyx);
+            transition: color 0.3s ease;
+            text-align: left;
+        }
+
+        .accordion-trigger:hover { color: var(--accent-gold); }
+        
+        .trigger-chevron { 
+            width: 24px; 
+            height: 24px; 
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+            flex-shrink: 0; 
+            margin-left: 1rem; 
+            transform-origin: center;
+            color: var(--text-muted);
+        }
+        
+        /* Fix applied here: Ensures rotation only happens to the opened accordion item */
+        .accordion-item.active .trigger-chevron { 
+            transform: rotate(-180deg); 
+            color: var(--accent-gold); 
+        }
+
+        .accordion-trigger:hover .trigger-chevron {
+            color: var(--accent-gold);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .accordion-content.open { max-height: 2500px; }
+        
+        .inner-prog { padding-bottom: 3rem; }
+        .prog-block { margin-bottom: 2.5rem; }
+        .prog-block h5 { letter-spacing: 2px; font-size: 0.85rem; color: var(--accent-gold); margin-bottom: 1rem; font-weight: 600; text-transform: uppercase; }
+        .prog-block ul { list-style: none; padding: 0; }
+        .prog-block ul li { margin-bottom: 0.8rem; font-weight: 300; font-size: 1rem; position: relative; padding-left: 1.5rem; }
+        .prog-block ul li::before { content: '✦'; position: absolute; left: 0; color: var(--accent-gold); }
+        .prog-block b { font-weight: 500; color: var(--text-onyx); }
+
+        /* --- FOOTER (JOIN US) --- */
+        footer#booking {
+            background-color: #0d0d0d;
+            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1545569341-9eb8b30979d9?q=80&w=2070&auto=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 9rem 5% 7rem;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .price-tag { font-size: 1.5rem; font-family: var(--font-display); color: var(--accent-gold-light); margin-top: 2rem; display: block; }
+        
+        /* --- ANIMATIONS --- */
+        .reveal { opacity: 0; transform: translateY(40px); transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 1024px) {
+            .hosts-layout, .city-grid, .pillar-card, .paths-grid, .rhythm-grid { grid-template-columns: 1fr; display: block; }
+            .hosts-image img, .city-visual { height: 450px; margin-bottom: 3rem; }
+            .pillar-img, .pillar-text { width: 100%; height: auto; padding: 2rem 0; }
+            .nav-links, .lang-selector-wrap { display: none; }
+            .mobile-toggle { display: block; }
+            .section-title { font-size: 3.5rem; }
+            .paths-grid { gap: 4rem; }
+            .rhythm-item { margin-bottom: 1.5rem; }
+            .path-collage { grid-template-rows: repeat(2, 150px); }
+            .path-column { margin-bottom: 6rem; padding: 2rem; }
+            .hotel-card { width: 300px; height: 400px; }
+
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: fixed;
+                top: 0; left: 0; width: 100%; height: 100vh;
+                background: var(--bg-ivory);
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+            }
+            .nav-links.open a { color: var(--text-onyx); font-size: 1.5rem; }
+            .mobile-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+            .mobile-toggle.active span:nth-child(2) { opacity: 0; }
+            .mobile-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="nav">
+        <div class="logo-container">
+            <a href="#" class="logo-text">Panorama Escapes</a>
+            <div class="logo-signature">
+                <span class="logo-handwritten">by Merve & Sergi</span>
+            </div>
+        </div>
+        
+        <div class="nav-right">
+            <div class="nav-links" id="nav-links">
+                <a href="#hosts" lang="en">Our Story</a>
+                <a href="#hosts" lang="tr">Hikayemiz</a>
+                <a href="#itinerary" lang="en">The Journey</a>
+                <a href="#itinerary" lang="tr">Yolculuk</a>
+                <a href="#program" lang="en">Full Program</a>
+                <a href="#program" lang="tr">Program</a>
+                <a href="#booking" class="btn-apply" lang="en">Join Us</a>
+                <a href="#booking" class="btn-apply" lang="tr">Bize Katılın</a>
+            </div>
+
+            <div class="lang-selector-wrap" id="lang-menu">
+                <div class="lang-current">
+                    <span id="active-lang">EN</span>
+                    <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                </div>
+                <div class="lang-dropdown">
+                    <div class="lang-option active" data-lang="en">EN</div>
+                    <div class="lang-option" data-lang="tr">TR</div>
+                </div>
+            </div>
+
+            <button class="mobile-toggle" id="mobile-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="reveal">Korea & Japan</h1>
+            <p class="hero-subtitle reveal" lang="en">An autumn glow journey</p>
+            <p class="hero-subtitle reveal" lang="tr">Bir sonbahar ışıltısı yolculuğu</p>
+            <p class="hero-date reveal" lang="en">October 17 – October 30, 2026<br>Five Couples Only</p>
+            <p class="hero-date reveal" lang="tr">17 Ekim – 30 Ekim 2026<br>Sadece Beş Çift</p>
+            <div class="reveal">
+                <a href="#hosts" class="cta-btn" lang="en">Discover The Experience</a>
+                <a href="#hosts" class="cta-btn" lang="tr">Deneyimi Keşfedin</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="hosts" class="hosts-section">
+        <div class="hosts-layout">
+            <div class="hosts-image reveal">
+                <img src="7AB585D0-F398-4519-80C0-9AA380C792A3.jpg" onerror="this.src='https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1974&auto=format&fit=crop'" alt="Merve & Sergi">
+            </div>
+            <div class="hosts-content reveal">
+                <h3 lang="en">Led By A Couple, For Couples.</h3>
+                <h3 lang="tr">Bir Çiftten, Çiftlere.</h3>
+                
+                <div lang="en">
+                    <p>We are Merve and Sergi, passionate global explorers and curators of distinctive travel experiences, currently based in Cape Town.</p>
+                    <p>Merve, the creative heart behind <a href="https://www.beniyiyimanne.com/" target="_blank" class="bio-link">Beni Yiyim Anne</a> (<a href="https://www.instagram.com/beniyiyimanne/" target="_blank" class="bio-link">@beniyiyimanne</a>), views travel as an art form. She believes true luxury lies in aesthetic discovery, emotional connection, and shared community rather than a rigid checklist.</p> 
+                    <p>Sergi (<a href="https://www.instagram.com/bifffratelli/" target="_blank" class="bio-link">@bifffratelli</a>) is a seasoned adventurer with a soul for discovery. Having explored over 120 countries, his deep connection to Korea and Japan runs deep. As our resident photographer, Sergi will capture the authentic, raw beauty of our time together.</p>
+                    <p>We understand the unique dynamic of traveling as a couple. You crave the energy of a like-minded group yet cherish private moments to connect and wander hand-in-hand.</p>
+                    <p>As your hosts and companions, we navigate every nuance. You simply arrive, embrace the aesthetics, and share an unforgettable journey with us.</p>
+                </div>
+
+                <div lang="tr">
+                    <p>Biz Merve ve Sergi; Cape Town'da yaşayan, tutkulu dünya gezginleri ve özgün seyahat deneyimleri küratörleriyiz.</p>
+                    <p><a href="https://www.beniyiyimanne.com/" target="_blank" class="bio-link">Beni Yiyim Anne</a> (<a href="https://www.instagram.com/beniyiyimanne/" target="_blank" class="bio-link">@beniyiyimanne</a>) markasının yaratıcısı Merve, seyahati bir sanat formu olarak görüyor. Gerçek lüksün katı bir listeden ziyade estetik keşifte, duygusal bağda ve paylaşılan bir topluluğun sıcaklığında olduğuna inanıyor.</p>
+                    <p>Sergi (<a href="https://www.instagram.com/bifffratelli/" target="_blank" class="bio-link">@bifffratelli</a>), keşif ruhuna sahip deneyimli bir macera tutkunu. 120'den fazla ülkeyi gezen Sergi'nin Kore ve Japonya ile olan bağı oldukça derin. Yolculuğumuz boyunca Sergi, paylaştığımız bu anların otantik ve ham güzelliğini objektifiyle ölümsüzleştirecek.</p>
+                    <p>Bir çift olarak seyahat etmenin kendine has dinamiğini anlıyoruz. Benzer düşünen bir grubun enerjisini arzularken, el ele yürümek ve özel bağlar kurmak için ihtiyacınız olan alana da saygı duyuyoruz.</p>
+                    <p>Sadece ev sahipleriniz değil, aynı zamanda yol arkadaşlarınız olarak her detayla biz ilgileniyoruz. Siz sadece gelip estetiğin tadını çıkarıyor ve bizimle unutulmaz bir yolculuğu paylaşıyorsunuz.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pattern-waves">
+        <div class="reveal">
+            <h2 class="section-title" style="color: var(--accent-gold-light);" lang="en">Our Philosophy</h2>
+            <h2 class="section-title" style="color: var(--accent-gold-light);" lang="tr">Felsefemiz</h2>
+            <p class="philosophy-text" lang="en">"Travel is best when shared. We join you as companions for a journey blending quiet luxury with authentic discovery."</p>
+            <p class="philosophy-text" lang="tr">"Seyahat paylaşıldığında en güzeldir. Sessiz lüks ile gerçek keşfi harmanlayan bu yolculukta size yol arkadaşı olarak katılıyoruz."</p>
+        </div>
+    </section>
+
+    <section id="itinerary" class="itinerary-section">
+        
+        <div class="itinerary-decor"></div>
+
+        <h2 class="section-title reveal" lang="en">The Autumnal Journey</h2>
+        <h2 class="section-title reveal" lang="tr">Sonbahar Yolculuğu</h2>
+        
+        <p class="section-intro reveal" lang="en">Our route traces a thoughtful line through the East’s most vibrant season. We balance the neon-lit metropolises with the profound silence of the coastal mountains.</p>
+        <p class="section-intro reveal" lang="tr">Rotamız, Doğu'nun en canlı mevsiminde özenle çizilmiş bir hat izliyor. Neon ışıklı metropolleri, kıyı dağlarının derin sessizliği ile dengeliyoruz.</p>
+        
+        <div class="map-wrapper reveal">
+            <svg viewBox="0 0 1000 200" class="map-svg">
+                <path d="M 100,100 C 250,20 350,180 500,100 C 650,20 750,180 900,100" fill="none" stroke="var(--accent-gold)" stroke-width="1.5" stroke-dasharray="10 10" />
+                <circle cx="100" cy="100" r="5" fill="var(--text-onyx)"/>
+                <text x="100" y="135" font-family="var(--font-display)" font-size="1.2rem" text-anchor="middle">Seoul</text>
+                <circle cx="300" cy="80" r="5" fill="var(--text-onyx)"/>
+                <text x="300" y="60" font-family="var(--font-display)" font-size="1.2rem" text-anchor="middle">Kyoto</text>
+                <circle cx="500" cy="100" r="5" fill="var(--text-onyx)"/>
+                <text x="500" y="135" font-family="var(--font-display)" font-size="1.2rem" text-anchor="middle">Izu</text>
+                <circle cx="700" cy="80" r="5" fill="var(--text-onyx)"/>
+                <text x="700" y="60" font-family="var(--font-display)" font-size="1.2rem" text-anchor="middle">Hakone</text>
+                <circle cx="900" cy="100" r="5" fill="var(--text-onyx)"/>
+                <text x="900" y="135" font-family="var(--font-display)" font-size="1.2rem" text-anchor="middle">Tokyo</text>
+            </svg>
+        </div>
+
+        <!-- SEOUL -->
+        <div class="city-grid reveal">
+            <div class="city-visual">
+                <img src="seoul.jpg" alt="Seoul in Autumn">
+            </div>
+            <div class="city-info">
+                <span class="day-tag" lang="en">Five Nights</span>
+                <span class="day-tag" lang="tr">Beş Gece</span>
+                <h3>Seoul</h3>
+                <p lang="en">A high-energy entry. From the fashion-forward pulse of Gangnam to the quiet majesty of Gyeongbokgung, we explore the intersection of legacy and modernity.</p>
+                <p lang="tr">Yüksek enerjili bir başlangıç. Gangnam'ın moda odaklı nabzından Gyeongbokgung'un sessiz ihtişamına kadar, mirasın ve modernliğin kesişme noktasını keşfediyoruz.</p>
+            </div>
+        </div>
+
+        <!-- KYOTO -->
+        <div class="city-grid reveal">
+            <div class="city-visual">
+                <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=2070&auto=format&fit=crop">
+            </div>
+            <div class="city-info">
+                <span class="day-tag" lang="en">Three Nights</span>
+                <span class="day-tag" lang="tr">Üç Gece</span>
+                <h3>Kyoto</h3>
+                <p lang="en">We transition into profound silence. We time our visit to witness the legendary Jidai Matsuri and find the city's hidden sanctuaries away from the crowds.</p>
+                <p lang="tr">Derin bir sessizliğe geçiş yapıyoruz. Ziyaretimizi efsanevi Jidai Matsuri'ye tanık olacak şekilde zamanlıyor ve kalabalıktan uzakta şehrin gizli sığınaklarını buluyoruz.</p>
+            </div>
+        </div>
+
+        <!-- IZU/HAKONE -->
+        <div class="city-grid reveal">
+            <div class="city-visual">
+                <img src="hakone.jpg">
+            </div>
+            <div class="city-info">
+                <span class="day-tag" lang="en">Three Nights</span>
+                <span class="day-tag" lang="tr">Üç Gece</span>
+                <h3>Izu & Hakone</h3>
+                <p lang="tr">Bir sahil molası. Tokyo'daki son şehir maceramızdan önce ihtiyacımız olan özel lagünler, dağ ryokanları ve yemyeşil bir yenilenme.</p>
+                <p lang="en">A coastal pause. Think private lagoons, mountain ryokans, and the lush reset needed before our final city immersion in Tokyo.</p>
+            </div>
+        </div>
+
+        <!-- TOKYO -->
+        <div class="city-grid reveal">
+            <div class="city-visual">
+                <img src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?q=80&w=2070&auto=format&fit=crop">
+            </div>
+            <div class="city-info">
+                <span class="day-tag" lang="en">Four Nights</span>
+                <span class="day-tag" lang="tr">Dört Gece</span>
+                <h3>Tokyo</h3>
+                <p lang="en">The finale. We dive into the urban heart of the East—from avant-garde cocktail dens to Michelin-starred mastery, it’s a high-energy celebration of modern style.</p>
+                <p lang="tr">Final. Doğu'nun kentsel kalbine dalıyoruz—avangart kokteyl mekanlarından Michelin yıldızlı ustalığa kadar, modern stilin yüksek enerjili bir kutlaması.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="pattern-waves">
+        <h2 class="section-title reveal" style="color: var(--accent-gold-light);" lang="en">The Experience</h2>
+        <h2 class="section-title reveal" style="color: var(--accent-gold-light);" lang="tr">Deneyim</h2>
+        
+        <p class="section-intro" style="color: rgba(255,255,255,0.7); max-width: 900px; margin-bottom: 5rem;" lang="en">A deep immersion into the textures, flavors, and rhythms that define Eastern hospitality.</p>
+        <p class="section-intro" style="color: rgba(255,255,255,0.7); max-width: 900px; margin-bottom: 5rem;" lang="tr">Doğu misafirperverliğini tanımlayan dokulara, tatlara ve ritimlere derinlemesine bir dalış.</p>
+        
+        <div class="pillar-card reveal">
+            <img src="img61065.whqc_1426x713q80.jpg" class="pillar-img">
+            <div class="pillar-text">
+                <span class="tag" lang="en">Taste</span>
+                <span class="tag" lang="tr">Lezzet</span>
+                <h3 lang="en">Culinary Art</h3>
+                <h3 lang="tr">Gastronomi Sanatı</h3>
+                <p lang="en">More than just dining. We’ve secured seats at the East's most coveted Michelin-starred tables for an unforgettable shared expedition.</p>
+                <p lang="tr">Sadece yemekten çok daha fazlası. Unutulmaz bir ortak keşif için Doğu'nun en çok arzu edilen Michelin yıldızlı masalarında yerimizi ayırttık.</p>
+            </div>
+        </div>
+
+        <div class="pillar-card reveal">
+            <img src="mobile-cover-64ce3fbe975af1691238334.jpg" class="pillar-img">
+            <div class="pillar-text">
+                <span class="tag" lang="en">Sanctuary</span>
+                <span class="tag" lang="tr">Arınma</span>
+                <h3 lang="en">Authentic Care</h3>
+                <h3 lang="tr">Otantik Bakım</h3>
+                <p lang="en">True luxury is the feeling of being genuinely looked after. From elite Korean skincare to mineral-rich onsen retreats, we ensure you return home glowing.</p>
+                <p lang="tr">Gerçek lüks, samimiyetle bakılma hissidir. Seçkin Kore cilt bakımından mineral zengini onsen inzivalarına kadar, eve ışıldayarak dönmenizi sağlıyoruz.</p>
+            </div>
+        </div>
+
+        <div class="pillar-card reveal">
+            <img src="ryokan.webp" class="pillar-img">
+            <div class="pillar-text">
+                <span class="tag" lang="en">Residence</span>
+                <span class="tag" lang="tr">Konaklama</span>
+                <h3 lang="en">Architectural Sanctuaries</h3>
+                <h3 lang="tr">Mimari Sığınaklar</h3>
+                <p lang="en">Our choice of stay is a journey in itself. From ultra-boutique ryokans on private lagoons to design-led urban retreats, each space is selected for its architectural soul and quiet elegance.</p>
+                <p lang="tr">Konaklama seçimimiz başlı başına bir yolculuk. Özel lagünlerdeki ultra butik ryokanlardan tasarım odaklı şehir inzivalarına kadar, her mekan mimari ruhu ve sessiz zarafeti için seçildi.</p>
+            </div>
+        </div>
+
+        <div class="pillar-card reveal">
+            <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?q=80&w=2069&auto=format&fit=crop" class="pillar-img">
+            <div class="pillar-text">
+                <span class="tag" lang="en">Pulse</span>
+                <span class="tag" lang="tr">Nabız</span>
+                <h3 lang="en">Vibrant Nights</h3>
+                <h3 lang="tr">Canlı Geceler</h3>
+                <p lang="en">Tasteful energy. We curate evenings that range from silent, low-lit whisky lounges to the most vibrant cultural celebrations.</p>
+                <p lang="tr">Zevkli bir enerji. Sessiz, loş ışıklı viski salonlarından en canlı kültürel kutlamalara kadar uzanan akşamlar kurguluyoruz.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="paths-section">
+        <h2 class="section-title reveal" lang="en">Personal Paths</h2>
+        <h2 class="section-title reveal" lang="tr">Kişisel Rotalar</h2>
+        
+        <p class="section-intro reveal" lang="en">Our journey is designed to celebrate both shared moments and individual passions. On choice days, follow the energy that speaks to you.</p>
+        <p class="section-intro reveal" lang="tr">Yolculuğumuz hem paylaşılan anları hem de bireysel tutkuları kutlamak için tasarlandı. Seçim günlerinde, size hitap eden enerjiyi takip edin.</p>
+        
+        <div class="paths-grid">
+            <div class="path-column reveal">
+                <span class="path-label">Choice A</span>
+                <h3 lang="en">The Radiance Path</h3>
+                <h3 lang="tr">Işıltı Rotası</h3>
+                <span class="path-lead" lang="en">Led By Merve</span>
+                <span class="path-lead" lang="tr">Merve Eşliğinde</span>
+                <div class="path-collage">
+                    <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop" class="main-feat">
+                    <img src="cream.webp" alt="Premium Skincare">
+                    <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=2070&auto=format&fit=crop">
+                </div>
+                <div class="benefit">
+                    <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+                    <div>
+                        <h4 lang="en">Advanced Skincare</h4>
+                        <h4 lang="tr">İleri Cilt Bakımı</h4>
+                        <p lang="en">Specialized treatments at leading Korean clinics and indulgent afternoons at the Aman Spa Tokyo.</p>
+                        <p lang="tr">Önde gelen Kore kliniklerinde özel tedaviler ve Aman Spa Tokyo'da huzurlu öğleden sonraları.</p>
+                    </div>
+                </div>
+                <div class="benefit">
+                    <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+                    <div>
+                        <h4 lang="en">Design & Curation</h4>
+                        <h4 lang="tr">Tasarım Ve Kürasyon</h4>
+                        <p lang="en">Guided routes through Seoul’s Dosan Park and VIP luxury scouting along Ginza.</p>
+                        <p lang="tr">Seul'ün Dosan Parkı'nda rehberli rotalar ve Ginza boyunca VIP lüks keşifleri.</p>
+                    </div>
+                </div>
+                <div class="benefit">
+                    <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                    <div>
+                        <h4 lang="en">Boutique Discovery</h4>
+                        <h4 lang="tr">Butik Keşifler</h4>
+                        <p lang="en">A curated shopping experience focusing on emerging Korean labels and Japanese heritage brands.</p>
+                        <p lang="tr">Yükselen Kore markalarına ve Japon miras markalarına odaklanan küratörlüğünde bir alışveriş deneyimi.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="path-column reveal">
+                <span class="path-label">Choice B</span>
+                <h3 lang="en">The Discovery Path</h3>
+                <h3 lang="tr">Keşif Rotası</h3>
+                <span class="path-lead" lang="en">Led By Sergi</span>
+                <span class="path-lead" lang="tr">Sergi Eşliğinde</span>
+                <div class="path-collage">
+                    <img src="whiskey-tasting.jpg" class="main-feat">
+                    <img src="car.jpg" alt="Tokyo Car Scene">
+                    <img src="sumo.jpg" alt="Sumo Wrestling">
+                </div>
+                <div class="benefit">
+                    <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 14a2 2 0 100-4 2 2 0 000 4z"/><path d="M13.4 10.6l-2.8-2.8"/><path d="M12 22a10 10 0 110-20 10 10 0 010 20z"/></svg>
+                    <div>
+                        <h4 lang="en">Engineering & Passion</h4>
+                        <h4 lang="tr">Mühendislik Ve Tutku</h4>
+                        <p lang="en">Access to the underground car scene and legendary meets at the Daikoku Parking Area.</p>
+                        <p lang="tr">Yeraltı araba sahnesine erişim ve Daikoku Park Alanı'ndaki efsanevi buluşmalar.</p>
+                    </div>
+                </div>
+                <div class="benefit">
+                    <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                    <div>
+                        <h4 lang="en">Master Craft</h4>
+                        <h4 lang="tr">Ustalık Zanaatı</h4>
+                        <p lang="en">Hands-on steel forging with a master bladesmith in Kyoto.</p>
+                        <p lang="tr">Kyoto'da usta bir bıçakçı ile uygulamalı çelik dövme deneyimi.</p>
+                    </div>
+                </div>
+                <div class="benefit">
+                    <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22h8"/><path d="M12 11v11"/><path d="M3 3l18 0"/><path d="M3 3l9 8 9-8"/></svg>
+                    <div>
+                        <h4 lang="en">Rare Spirits</h4>
+                        <h4 lang="tr">Nadir İçkiler</h4>
+                        <p lang="en">Exclusive tastings from Kyoto's hidden sake breweries to world-renowned whisky at Tokyo's Bar High Five.</p>
+                        <p lang="tr">Kyoto'nun gizli sake imalathanelerinden, Tokyo'nun dünyaca ünlü viski barı Bar High Five'a uzanan özel tadımlar.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pattern-hemp">
+        <h2 class="section-title reveal" lang="en">Our Rhythm</h2>
+        <h2 class="section-title reveal" lang="tr">Ritmimiz</h2>
+        <p class="section-intro reveal" style="color: rgba(255,255,255,0.7);" lang="en">Our flow is intentional but never rigid. We balance our time as a collective with the silence you need as a couple.</p>
+        <p class="section-intro reveal" style="color: rgba(255,255,255,0.7);" lang="tr">Akışımız planlı ancak asla katı değil. Grup olarak geçirdiğimiz zamanı, bir çift olarak ihtiyaç duyduğunuz sessizlikle dengeliyoruz.</p>
+        
+        <div class="rhythm-grid reveal">
+            <div class="rhythm-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <h3 lang="en">Collective Moments</h3>
+                <h3 lang="tr">Ortak Anlar</h3>
+                <p lang="en">Magic happens in the company of others. We gather for the pinnacle meals and shared stories.</p>
+                <p lang="tr">Sihir, başkalarının eşliğinde gerçekleşir. En özel yemekler ve paylaşılan hikayeler için bir araya geliyoruz.</p>
+            </div>
+            <div class="rhythm-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
+                <h3 lang="en">Individual Choice</h3>
+                <h3 lang="tr">Bireysel Seçim</h3>
+                <p lang="en">Follow your own spark. On choice days, Merve and Sergi each lead different tracks.</p>
+                <p lang="tr">Kendi kıvılcımınızı takip edin. Rota günlerinde Merve ve Sergi farklı ilgi alanlarına liderlik eder.</p>
+            </div>
+            <div class="rhythm-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                <h3 lang="en">Private Space</h3>
+                <h3 lang="tr">Özel Alan</h3>
+                <p lang="en">This is your time together. We ensure you have ample, unstructured room to breathe and bond.</p>
+                <p lang="tr">Bu sizin birlikte geçireceğiniz zaman. Nefes almanız ve bağ kurmanız için yeterli alanı sağlıyoruz.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="hotels" class="sanctuaries-section">
+        <div class="itinerary-decor" style="top: -2rem; opacity: 0.12;"></div>
+        <div style="padding: 0 5%; position: relative; z-index: 1;">
+            <h2 class="section-title reveal" lang="en">Our Sanctuaries</h2>
+            <h2 class="section-title reveal" lang="tr">Sığınaklarımız</h2>
+            <p class="section-intro reveal" lang="en">Carefully selected retreats that reflect the architectural soul and quiet elegance of our destinations.</p>
+            <p class="section-intro reveal" lang="tr">Destinasyonlarımızın mimari ruhunu ve sessiz zarafetini yansıtan, özenle seçilmiş konaklama noktalarımız.</p>
+        </div>
+        
+        <div class="carousel-wrapper reveal">
+            <div class="carousel-track">
+                <!-- Group 1 -->
+                <div class="carousel-group">
+                    <a href="https://josunpalace.josunhotel.com/" target="_blank" class="hotel-card">
+                        <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=1974&auto=format&fit=crop">
+                        <div class="hotel-overlay-info">
+                            <h4>Josun Palace</h4>
+                            <p lang="en">Seoul</p>
+                            <p lang="tr">Seul</p>
+                        </div>
+                    </a>
+                    <a href="https://sowaka.com/" target="_blank" class="hotel-card">
+                        <img src="https://images.unsplash.com/photo-1522798514-97ceb8c4f1c8?q=80&w=2070&auto=format&fit=crop">
+                        <div class="hotel-overlay-info">
+                            <h4>Sowaka</h4>
+                            <p>Kyoto</p>
+                        </div>
+                    </a>
+                    <a href="https://asaba-ryokan.com/en/" target="_blank" class="hotel-card">
+                        <img src="asaba.jpg" alt="Asaba Ryokan">
+                        <div class="hotel-overlay-info">
+                            <h4>Asaba</h4>
+                            <p>Izu</p>
+                        </div>
+                    </a>
+                    <a href="https://www.gorakadan.com/" target="_blank" class="hotel-card">
+                        <img src="gora.jpg" alt="Gora Kadan">
+                        <div class="hotel-overlay-info">
+                            <h4>Gora Kadan</h4>
+                            <p>Hakone</p>
+                        </div>
+                    </a>
+                    <a href="https://trunk-hotel.com/" target="_blank" class="hotel-card">
+                        <img src="trunk.jpg" alt="TRUNK Hotel">
+                        <div class="hotel-overlay-info">
+                            <h4>TRUNK(HOTEL)</h4>
+                            <p>Tokyo</p>
+                        </div>
+                    </a>
+                </div>
+                <!-- Group 2 for infinite scroll -->
+                <div class="carousel-group">
+                    <a href="https://josunpalace.josunhotel.com/" target="_blank" class="hotel-card">
+                        <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=1974&auto=format&fit=crop">
+                        <div class="hotel-overlay-info">
+                            <h4>Josun Palace</h4>
+                            <p lang="en">Seoul</p>
+                            <p lang="tr">Seul</p>
+                        </div>
+                    </a>
+                    <a href="https://sowaka.com/" target="_blank" class="hotel-card">
+                        <img src="https://images.unsplash.com/photo-1522798514-97ceb8c4f1c8?q=80&w=2070&auto=format&fit=crop">
+                        <div class="hotel-overlay-info">
+                            <h4>Sowaka</h4>
+                            <p>Kyoto</p>
+                        </div>
+                    </a>
+                    <a href="https://asaba-ryokan.com/en/" target="_blank" class="hotel-card">
+                        <img src="asaba.jpg" alt="Asaba Ryokan">
+                        <div class="hotel-overlay-info">
+                            <h4>Asaba</h4>
+                            <p>Izu</p>
+                        </div>
+                    </a>
+                    <a href="https://www.gorakadan.com/" target="_blank" class="hotel-card">
+                        <img src="gora.jpg" alt="Gora Kadan">
+                        <div class="hotel-overlay-info">
+                            <h4>Gora Kadan</h4>
+                            <p>Hakone</p>
+                        </div>
+                    </a>
+                    <a href="https://trunk-hotel.com/" target="_blank" class="hotel-card">
+                        <img src="trunk.jpg" alt="TRUNK Hotel">
+                        <div class="hotel-overlay-info">
+                            <h4>TRUNK(HOTEL)</h4>
+                            <p>Tokyo</p>
+                        </div>
+                    </a>
+                </div>
+                <!-- Group 2 for infinite scroll -->
+                <div class="carousel-group">
+                    <a href="https://josunpalace.josunhotel.com/" target="_blank" class="hotel-card">
+                        <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=1974&auto=format&fit=crop">
+                        <div class="hotel-overlay-info">
+                            <h4>Josun Palace</h4>
+                            <p lang="en">Seoul</p>
+                            <p lang="tr">Seul</p>
+                        </div>
+                    </a>
+                    <a href="https://sowaka.com/" target="_blank" class="hotel-card">
+                        <img src="https://images.unsplash.com/photo-1522798514-97ceb8c4f1c8?q=80&w=2070&auto=format&fit=crop">
+                        <div class="hotel-overlay-info">
+                            <h4>Sowaka</h4>
+                            <p>Kyoto</p>
+                        </div>
+                    </a>
+                    <a href="https://asaba-ryokan.com/en/" target="_blank" class="hotel-card">
+                        <img src="asaba.jpg" alt="Asaba Ryokan">
+                        <div class="hotel-overlay-info">
+                            <h4>Asaba</h4>
+                            <p>Izu</p>
+                        </div>
+                    </a>
+                    <a href="https://www.gorakadan.com/" target="_blank" class="hotel-card">
+                        <img src="gora.jpeg" alt="Gora Kadan">
+                        <div class="hotel-overlay-info">
+                            <h4>Gora Kadan</h4>
+                            <p>Hakone</p>
+                        </div>
+                    </a>
+                    <a href="https://trunk-hotel.com/" target="_blank" class="hotel-card">
+                        <img src="trunk.jpg" alt="TRUNK Hotel">
+                        <div class="hotel-overlay-info">
+                            <h4>TRUNK(HOTEL)</h4>
+                            <p>Tokyo</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="program" class="program-section">
+        <h2 class="section-title reveal" lang="en">The Full Program</h2>
+        <h2 class="section-title reveal" lang="tr">Tüm Program</h2>
+        <p class="section-intro reveal" lang="en">A meticulously paced day-by-day overview of our curated journey through Korea and Japan.</p>
+        <p class="section-intro reveal" lang="tr">Kore ve Japonya boyunca özenle kurgulanmış yolculuğumuzun gün gün detaylı özeti.</p>
+        
+        <div class="accordion reveal">
+            <!-- DAY 1 -->
+            <div class="accordion-item">
+                <button class="accordion-trigger" lang="en"><span>Day 1 | Seoul | Arrival & Soft Landing</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <button class="accordion-trigger" lang="tr"><span>1. Gün | Seul | Varış & Yumuşak İniş</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <div class="accordion-content">
+                    <div class="inner-prog">
+                        <div class="prog-block">
+                            <h5 lang="en">Morning</h5>
+                            <h5 lang="tr">Sabah</h5>
+                            <ul lang="en">
+                                <li>Hotel: <b>Josun Palace Gangnam</b> (early check-in)</li>
+                                <li><b>Bongeunsa Temple</b></li>
+                            </ul>
+                            <ul lang="tr">
+                                <li>Otel: <b>Josun Palace Gangnam</b> (erken giriş)</li>
+                                <li><b>Bongeunsa Tapınağı</b></li>
+                            </ul>
+                            <h5 lang="en">Lunch & Afternoon</h5>
+                            <h5 lang="tr">Öğle Yemeği & Öğleden Sonra</h5>
+                            <ul lang="en">
+                                <li>Lunch: <b>Mingles</b></li>
+                                <li>Recovery: Spa / Pool / Rest</li>
+                            </ul>
+                            <ul lang="tr">
+                                <li>Öğle Yemeği: <b>Mingles</b></li>
+                                <li>Toparlanma: Spa / Havuz / Dinlenme</li>
+                            </ul>
+                            <h5 lang="en">Evening</h5>
+                            <h5 lang="tr">Akşam</h5>
+                            <ul lang="en">
+                                <li>Rooftop drinks at <b>1914 Lounge</b></li>
+                                <li>Dinner at <b>Born & Bred</b></li>
+                                <li>Optional: <b>Le Chamber</b></li>
+                            </ul>
+                            <ul lang="tr">
+                                <li><b>1914 Lounge</b>'da çatı katı içkileri</li>
+                                <li><b>Born & Bred</b>'de Akşam Yemeği</li>
+                                <li>İsteğe Bağlı: <b>Le Chamber</b></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 2 -->
+            <div class="accordion-item">
+                <button class="accordion-trigger" lang="en"><span>Day 2 | Seoul | Culture + Fashion + Nightlife</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <button class="accordion-trigger" lang="tr"><span>2. Gün | Seul | Kültür + Moda + Gece Hayatı</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <div class="accordion-content">
+                    <div class="inner-prog">
+                        <div class="prog-block">
+                            <h5 lang="en">Morning & Lunch</h5>
+                            <h5 lang="tr">Sabah & Öğle Yemeği</h5>
+                            <ul lang="en">
+                                <li><b>Gyeongbokgung Palace</b> (early private visit)</li>
+                                <li><b>Bukchon Hanok Village</b></li>
+                                <li>Coffee: <b>Cafe Onion Anguk</b></li>
+                                <li>Lunch: <b>Tosokchon Samgyetang</b></li>
+                            </ul>
+                            <ul lang="tr">
+                                <li><b>Gyeongbokgung Sarayı</b> (erken özel ziyaret)</li>
+                                <li><b>Bukchon Hanok Köyü</b></li>
+                                <li>Kahve: <b>Cafe Onion Anguk</b></li>
+                                <li>Öğle Yemeği: <b>Tosokchon Samgyetang</b></li>
+                            </ul>
+                            <h5 lang="en">Afternoon</h5>
+                            <h5 lang="tr">Öğleden Sonra</h5>
+                            <ul lang="en">
+                                <li>Apgujeong: <b>Gentle Monster Haus Dosan</b>, <b>Tamburins</b>, <b>ADER Error</b></li>
+                            </ul>
+                            <ul lang="tr">
+                                <li>Apgujeong: <b>Gentle Monster Haus Dosan</b>, <b>Tamburins</b>, <b>ADER Error</b></li>
+                            </ul>
+                            <h5 lang="en">Evening & Night</h5>
+                            <h5 lang="tr">Akşam & Gece</h5>
+                            <ul lang="en">
+                                <li>Dinner: <b>Jungsik Seoul</b></li>
+                                <li>Night: <b>Zest Seoul</b> → <b>Volnost</b></li>
+                            </ul>
+                            <ul lang="tr">
+                                <li>Akşam Yemeği: <b>Jungsik Seoul</b></li>
+                                <li>Gece: <b>Zest Seoul</b> → <b>Volnost</b></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 3 -->
+            <div class="accordion-item">
+                <button class="accordion-trigger" lang="en"><span>Day 3 | Seoul | Choice Day</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <button class="accordion-trigger" lang="tr"><span>3. Gün | Seul | Seçim Günü</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <div class="accordion-content">
+                    <div class="inner-prog">
+                        <div class="prog-block">
+                            <h5 lang="en">The Radiance Path</h5>
+                            <h5 lang="tr">Işıltı Rotası</h5>
+                            <ul lang="en">
+                                <li><b>ME Clinic</b></li>
+                                <li>Lunch: <b>Nudake Haus Dosan</b></li>
+                                <li><b>Tamburins</b> & <b>Gentle Monster Haus Dosan</b></li>
+                                <li><b>Sulwhasoo Spa</b></li>
+                            </ul>
+                            <ul lang="tr">
+                                <li><b>ME Clinic</b></li>
+                                <li>Öğle Yemeği: <b>Nudake Haus Dosan</b></li>
+                                <li><b>Tamburins</b> & <b>Gentle Monster Haus Dosan</b></li>
+                                <li><b>Sulwhasoo Spa</b></li>
+                            </ul>
+                            <h5 lang="en">The Discovery Path</h5>
+                            <h5 lang="tr">Keşif Rotası</h5>
+                            <ul lang="en">
+                                <li><b>Samsung d’light</b></li>
+                                <li>Lunch: Street food tasting at <b>Gwangjang Market</b></li>
+                                <li>Drinks: <b>Zest Seoul</b></li>
+                            </ul>
+                            <ul lang="tr">
+                                <li><b>Samsung d’light</b></li>
+                                <li>Öğle Yemeği: <b>Gwangjang Pazarı</b>'nda sokak lezzetleri tadımı</li>
+                                <li>İçkiler: <b>Zest Seoul</b></li>
+                            </ul>
+                            <h5 lang="en">Evening</h5>
+                            <h5 lang="tr">Akşam</h5>
+                            <ul lang="en">
+                                <li>Dinner Together: <b>Mosu Seoul</b></li>
+                            </ul>
+                            <ul lang="tr">
+                                <li>Birlikte Akşam Yemeği: <b>Mosu Seoul</b></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 4 -->
+            <div class="accordion-item">
+                <button class="accordion-trigger" lang="en"><span>Day 4 | Seoul | Creative & Cultural Peak</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <button class="accordion-trigger" lang="tr"><span>4. Gün | Seul | Yaratıcı & Kültürel Zirve</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <div class="accordion-content">
+                    <div class="inner-prog">
+                        <div class="prog-block">
+                            <h5 lang="en">Morning</h5>
+                            <h5 lang="tr">Sabah</h5>
+                            <ul lang="en">
+                                <li>Explore Seongsu-dong creative district and <b>Daelim Changgo</b></li>
+                            </ul>
+                            <ul lang="tr">
+                                <li>Seongsu-dong yaratıcı bölgesi ve <b>Daelim Changgo</b> keşfi</li>
+                            </ul>
+                            <h5 lang="en">Lunch & Afternoon</h5>
+                            <h5 lang="tr">Öğle Yemeği & Öğleden Sonra</h5>
+                            <ul lang="en">
+                                <li>Lunch: <b>Onjium</b></li>
+                                <li><b>Spa 1899</b></li>
+                            </ul>
+                            <ul lang="tr">
+                                <li>Öğle Yemeği: <b>Onjium</b></li>
+                                <li><b>Spa 1899</b></li>
+                            </ul>
+                            <h5 lang="en">Evening & Night</h5>
+                            <h5 lang="tr">Akşam & Gece</h5>
+                            <ul lang="en">
+                                <li>Dinner: <b>Mingles Chef’s Counter</b></li>
+                                <li>Night: <b>Charles H Bar</b></li>
+                            </ul>
+                            <ul lang="tr">
+                                <li>Akşam Yemeği: <b>Mingles Şefin Tezgahı</b></li>
+                                <li>Gece: <b>Charles H Bar</b></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 5 -->
+            <div class="accordion-item">
+                <button class="accordion-trigger" lang="en"><span>Day 5 | Seoul | Flexible Day</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <button class="accordion-trigger" lang="tr"><span>5. Gün | Seul | Esnek Gün</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <div class="accordion-content">
+                    <div class="inner-prog">
+                        <div class="prog-block">
+                            <h5 lang="en">Options</h5>
+                            <h5 lang="tr">Seçenekler</h5>
+                            <ul lang="en">
+                                <li><b>DMZ tour</b></li>
+                                <li><b>Hongdae nightlife</b></li>
+                                <li><b>Cooking class</b></li>
+                            </ul>
+                            <ul lang="tr">
+                                <li><b>DMZ turu</b></li>
+                                <li><b>Hongdae gece hayatı</b></li>
+                                <li><b>Yemek kursu</b></li>
+                            </ul>
+                            <h5 lang="en">Evening</h5>
+                            <h5 lang="tr">Akşam</h5>
+                            <ul lang="en">
+                                <li>Dinner: <b>Samwon Garden</b></li>
+                            </ul>
+                            <ul lang="tr">
+                                <li>Akşam Yemeği: <b>Samwon Garden</b></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 6 -->
+            <div class="accordion-item">
+                <button class="accordion-trigger" lang="en"><span>Day 6 | Kyoto | Arrival + Icon</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <button class="accordion-trigger" lang="tr"><span>6. Gün | Kyoto | Varış + İkonik Simgeler</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <div class="accordion-content">
+                    <div class="inner-prog">
+                        <div class="prog-block">
+                            <h5 lang="en">Travel & Afternoon</h5>
+                            <h5 lang="tr">Seyahat & Öğleden Sonra</h5>
+                            <ul lang="en">
+                                <li>Travel: Seoul → Osaka → Kyoto</li>
+                                <li>Lunch: Casual dining upon arrival in Kyoto</li>
+                                <li>Hotel: <b>Sowaka Kyoto</b></li>
+                                <li><b>Fushimi Inari Taisha</b></li>
+                            </ul>
+                            <ul lang="tr">
+                                <li>Seyahat: Seul → Osaka → Kyoto</li>
+                                <li>Öğle Yemeği: Kyoto'ya varışta rahat bir öğle yemeği</li>
+                                <li>Otel: <b>Sowaka Kyoto</b></li>
+                                <li><b>Fushimi Inari Taisha</b></li>
+                            </ul>
+                            <h5 lang="en">Evening</h5>
+                            <h5 lang="tr">Akşam</h5>
+                            <ul lang="en">
+                                <li>Dinner: <b>Kikunoi Honten</b></li>
+                            </ul>
+                            <ul lang="tr">
+                                <li>Akşam Yemeği: <b>Kikunoi Honten</b></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 7 -->
+            <div class="accordion-item">
+                <button class="accordion-trigger" lang="en"><span>Day 7 | Kyoto | Must-Sees</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <button class="accordion-trigger" lang="tr"><span>7. Gün | Kyoto | Görülmesi Gerekenler</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <div class="accordion-content">
+                    <div class="inner-prog">
+                        <div class="prog-block">
+                            <h5 lang="en">Morning</h5>
+                            <h5 lang="tr">Sabah</h5>
+                            <ul lang="en">
+                                <li><b>Kinkaku-ji</b></li>
+                                <li><b>Ryoan-ji</b></li>
+                            </ul>
+                            <ul lang="tr">
+                                <li><b>Kinkaku-ji</b></li>
+                                <li><b>Ryoan-ji</b></li>
+                            </ul>
+                            <h5 lang="en">Lunch & Afternoon</h5>
+                            <h5 lang="tr">Öğle Yemeği & Öğleden Sonra</h5>
+                            <ul lang="en">
+                                <li>Lunch: Traditional Yudofu (Tofu) cuisine near Ryoan-ji</li>
+                                <li><b>Arashiyama Bamboo Grove</b></li>
+                            </ul>
+                            <ul lang="tr">
+                                <li>Öğle Yemeği: Ryoan-ji yakınında geleneksel Yudofu (Tofu) mutfağı</li>
+                                <li><b>Arashiyama Bambu Korusu</b></li>
+                            </ul>
+                            <h5 lang="en">Evening</h5>
+                            <h5 lang="tr">Akşam</h5>
+                            <ul lang="en">
+                                <li>Dinner: <b>Gion Sasaki</b></li>
+                                <li>Night: <b>L’Escamoteur</b></li>
+                            </ul>
+                            <ul lang="tr">
+                                <li>Akşam Yemeği: <b>Gion Sasaki</b></li>
+                                <li>Gece: <b>L’Escamoteur</b></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 8 -->
+            <div class="accordion-item">
+                <button class="accordion-trigger" lang="en"><span>Day 8 | Kyoto | Split Day</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <button class="accordion-trigger" lang="tr"><span>8. Gün | Kyoto | Ayrı Rotalar</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <div class="accordion-content">
+                    <div class="inner-prog">
+                        <div class="prog-block">
+                            <h5 lang="en">The Radiance Path</h5>
+                            <h5 lang="tr">Işıltı Rotası</h5>
+                            <ul lang="en">
+                                <li>Kimono styling</li>
+                                <li>Lunch: Kyoto-style Obanzai dining</li>
+                                <li><b>Sou Sou</b> shopping & <b>Takashimaya</b></li>
+                                <li>Spa (<b>Tenzan no Yu</b>)</li>
+                            </ul>
+                            <ul lang="tr">
+                                <li>Kimono stili</li>
+                                <li>Öğle Yemeği: Kyoto tarzı Obanzai menüsü</li>
+                                <li><b>Sou Sou</b> alışverişi & <b>Takashimaya</b></li>
+                                <li>Spa (<b>Tenzan no Yu</b>)</li>
+                            </ul>
+                            <h5 lang="en">The Discovery Path</h5>
+                            <h5 lang="tr">Keşif Rotası</h5>
+                            <ul lang="en">
+                                <li>Knife forging (<b>Shigeharu</b>)</li>
+                                <li>Lunch: Traditional Izakaya in Fushimi</li>
+                                <li>Sake tasting (<b>Gekkeikan</b>)</li>
+                            </ul>
+                            <ul lang="tr">
+                                <li>Bıçak dövme (<b>Shigeharu</b>)</li>
+                                <li>Öğle Yemeği: Fushimi'de geleneksel Izakaya</li>
+                                <li>Sake tadımı (<b>Gekkeikan</b>)</li>
+                            </ul>
+                            <h5 lang="en">Evening</h5>
+                            <h5 lang="tr">Akşam</h5>
+                            <ul lang="en">
+                                <li>Dinner: <b>Sushi Matsumoto</b></li>
+                            </ul>
+                            <ul lang="tr">
+                                <li>Akşam Yemeği: <b>Sushi Matsumoto</b></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 9 -->
+            <div class="accordion-item">
+                <button class="accordion-trigger" lang="en"><span>Day 9 | Izu Peninsula | Lagoon Reset</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <button class="accordion-trigger" lang="tr"><span>9. Gün | Izu Yarımadası | Lagün Yenilenmesi</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <div class="accordion-content">
+                    <div class="inner-prog">
+                        <div class="prog-block">
+                            <h5 lang="en">Lunch & Experience</h5>
+                            <h5 lang="tr">Öğle Yemeği & Deneyim</h5>
+                            <ul lang="en">
+                                <li>Lunch: Premium Shinkansen Bento & Mishima Unagi tasting</li>
+                                <li>Transfer to <b>Asaba Ryokan</b>. Check-in to lagoon-side suites</li>
+                            </ul>
+                            <ul lang="tr">
+                                <li>Öğle Yemeği: Premium Shinkansen Bento & Mishima Unagi (Yılan Balığı) tadımı</li>
+                                <li><b>Asaba Ryokan</b>'a transfer. Lagün kenarı süitlere giriş</li>
+                            </ul>
+                            <h5 lang="en">Evening</h5>
+                            <h5 lang="tr">Akşam</h5>
+                            <ul lang="en">
+                                <li>Kaiseki dinner overlooking the floating stage</li>
+                            </ul>
+                            <ul lang="tr">
+                                <li>Yüzen sahneye bakan Kaiseki akşam yemeği</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 10 -->
+            <div class="accordion-item">
+                <button class="accordion-trigger" lang="en"><span>Day 10 | Izu Peninsula | Exploration</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <button class="accordion-trigger" lang="tr"><span>10. Gün | Izu Yarımadası | Keşif</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <div class="accordion-content">
+                    <div class="inner-prog">
+                        <div class="prog-block">
+                            <h5 lang="en">Daytime & Lunch</h5>
+                            <h5 lang="tr">Gündüz & Öğle Yemeği</h5>
+                            <ul lang="en">
+                                <li>Wasabi farm trek or mountain cycling</li>
+                                <li>Lunch: Artisanal Izu Soba with freshly grated local wasabi</li>
+                            </ul>
+                            <ul lang="tr">
+                                <li>Wasabi çiftliği yürüyüşü veya dağ bisikleti</li>
+                                <li>Öğle Yemeği: Taze rendelenmiş yerel wasabi ile butik Izu Soba eriştesi</li>
+                            </ul>
+                            <h5 lang="en">Evening</h5>
+                            <h5 lang="tr">Akşam</h5>
+                            <ul lang="en">
+                                <li>Private lagoonside dining</li>
+                            </ul>
+                            <ul lang="tr">
+                                <li>Lagün kenarında özel akşam yemeği</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 11 -->
+            <div class="accordion-item">
+                <button class="accordion-trigger" lang="en"><span>Day 11 | Hakone | Scenic Sanctuaries</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <button class="accordion-trigger" lang="tr"><span>11. Gün | Hakone | Manzaralı Sığınaklar</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <div class="accordion-content">
+                    <div class="inner-prog">
+                        <div class="prog-block">
+                            <h5 lang="en">Activities & Lunch</h5>
+                            <h5 lang="tr">Aktiviteler & Öğle Yemeği</h5>
+                            <ul lang="en">
+                                <li>Short private transfer to <b>Gora Kadan</b></li>
+                                <li>Lunch: Exclusive dining at Gora Brewery & Grill</li>
+                                <li><b>Lake Ashi</b></li>
+                                <li><b>Hakone Open-Air Museum</b></li>
+                            </ul>
+                            <ul lang="tr">
+                                <li><b>Gora Kadan</b>'a kısa özel transfer</li>
+                                <li>Öğle Yemeği: Gora Brewery & Grill'de seçkin öğle yemeği</li>
+                                <li><b>Ashi Gölü</b></li>
+                                <li><b>Hakone Açık Hava Müzesi</b></li>
+                            </ul>
+                            <h5 lang="en">Evening</h5>
+                            <h5 lang="tr">Akşam</h5>
+                            <ul lang="en">
+                                <li>En-suite Kaiseki dinner and mountain view soaking</li>
+                            </ul>
+                            <ul lang="tr">
+                                <li>Süit içi Kaiseki akşam yemeği ve dağ manzaralı kaplıca</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 12 -->
+            <div class="accordion-item">
+                <button class="accordion-trigger" lang="en"><span>Day 12 | Tokyo | Arrival</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <button class="accordion-trigger" lang="tr"><span>12. Gün | Tokyo | Varış</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <div class="accordion-content">
+                    <div class="inner-prog">
+                        <div class="prog-block">
+                            <h5 lang="en">Travel & Lunch</h5>
+                            <h5 lang="tr">Seyahat & Öğle Yemeği</h5>
+                            <ul lang="en">
+                                <li>Lunch: Gourmet Ekiben on the Shinkansen to Tokyo</li>
+                                <li>Bullet Train to Tokyo. Stay at <b>TRUNK(HOTEL)</b></li>
+                            </ul>
+                            <ul lang="tr">
+                                <li>Öğle Yemeği: Tokyo'ya giden Shinkansen'de gurme Ekiben</li>
+                                <li>Tokyo'ya hızlı tren. <b>TRUNK(HOTEL)</b>'de konaklama</li>
+                            </ul>
+                            <h5 lang="en">Evening & Night</h5>
+                            <h5 lang="tr">Akşam & Gece</h5>
+                            <ul lang="en">
+                                <li>Dinner: <b>Sushi Hashimoto</b></li>
+                                <li>Night: <b>SG Club</b></li>
+                            </ul>
+                            <ul lang="tr">
+                                <li>Akşam Yemeği: <b>Sushi Hashimoto</b></li>
+                                <li>Gece: <b>SG Club</b></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 13 -->
+            <div class="accordion-item">
+                <button class="accordion-trigger" lang="en"><span>Day 13 | Tokyo | Pulse</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <button class="accordion-trigger" lang="tr"><span>13. Gün | Tokyo | Nabız</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <div class="accordion-content">
+                    <div class="inner-prog">
+                        <div class="prog-block">
+                            <h5 lang="en">Highlights & Lunch</h5>
+                            <h5 lang="tr">Öne Çıkanlar & Öğle Yemeği</h5>
+                            <ul lang="en">
+                                <li><b>Shibuya Crossing</b></li>
+                                <li><b>Meiji Shrine</b></li>
+                                <li><b>Omotesando</b></li>
+                                <li>Lunch: Premium Tonkatsu in Omotesando</li>
+                            </ul>
+                            <ul lang="tr">
+                                <li><b>Shibuya Geçidi</b></li>
+                                <li><b>Meiji Tapınağı</b></li>
+                                <li><b>Omotesando</b></li>
+                                <li>Öğle Yemeği: Omotesando'da Premium Tonkatsu</li>
+                            </ul>
+                            <h5 lang="en">Evening</h5>
+                            <h5 lang="tr">Akşam</h5>
+                            <ul lang="en">
+                                <li>Dinner: <b>Den Tokyo</b></li>
+                            </ul>
+                            <ul lang="tr">
+                                <li>Akşam Yemeği: <b>Den Tokyo</b></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 14 -->
+            <div class="accordion-item">
+                <button class="accordion-trigger" lang="en"><span>Day 14 | Tokyo | Choice Day</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <button class="accordion-trigger" lang="tr"><span>14. Gün | Tokyo | Seçim Günü</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <div class="accordion-content">
+                    <div class="inner-prog">
+                        <div class="prog-block">
+                            <h5 lang="en">The Radiance Path</h5>
+                            <h5 lang="tr">Işıltı Rotası</h5>
+                            <ul lang="en">
+                                <li>Omotesando shopping</li>
+                                <li>Lunch: Exclusive Omotesando dining</li>
+                                <li><b>Aman Spa</b></li>
+                            </ul>
+                            <ul lang="tr">
+                                <li>Omotesando alışverişi</li>
+                                <li>Öğle Yemeği: Omotesando'da seçkin bir yemek</li>
+                                <li><b>Aman Spa</b></li>
+                            </ul>
+                            <h5 lang="en">The Discovery Path</h5>
+                            <h5 lang="tr">Keşif Rotası</h5>
+                            <ul lang="en">
+                                <li><b>Daikoku Parking Area</b></li>
+                                <li>Lunch: Premium Wagyu Yakiniku</li>
+                                <li><b>Bar High Five</b></li>
+                            </ul>
+                            <ul lang="tr">
+                                <li><b>Daikoku Park Alanı</b></li>
+                                <li>Öğle Yemeği: Premium Wagyu Yakiniku</li>
+                                <li><b>Bar High Five</b></li>
+                            </ul>
+                            <h5 lang="en">Evening</h5>
+                            <h5 lang="tr">Akşam</h5>
+                            <ul lang="en">
+                                <li>Dinner: <b>Narisawa</b></li>
+                            </ul>
+                            <ul lang="tr">
+                                <li>Akşam Yemeği: <b>Narisawa</b></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 15 -->
+            <div class="accordion-item">
+                <button class="accordion-trigger" lang="en"><span>Day 15 | Tokyo | Art & Finale</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <button class="accordion-trigger" lang="tr"><span>15. Gün | Tokyo | Sanat & Final</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <div class="accordion-content">
+                    <div class="inner-prog">
+                        <div class="prog-block">
+                            <h5 lang="en">Daytime & Lunch</h5>
+                            <h5 lang="tr">Gündüz & Öğle Yemeği</h5>
+                            <ul lang="en">
+                                <li>Immersive digital art at <b>teamLab Borderless</b></li>
+                                <li>Lunch: Modern Japanese cuisine near Azabudai Hills</li>
+                            </ul>
+                            <ul lang="tr">
+                                <li><b>teamLab Borderless</b>'ta sürükleyici dijital sanat</li>
+                                <li>Öğle Yemeği: Azabudai Hills yakınlarında modern Japon mutfağı</li>
+                            </ul>
+                            <h5 lang="en">Evening</h5>
+                            <h5 lang="tr">Akşam</h5>
+                            <ul lang="en">
+                                <li>Dinner: <b>Tempura Kondo</b></li>
+                                <li>Night: Farewell mixology at <b>Bar Benfiddich</b></li>
+                            </ul>
+                            <ul lang="tr">
+                                <li>Akşam Yemeği: <b>Tempura Kondo</b></li>
+                                <li>Gece: <b>Bar Benfiddich</b>'te veda miksolojisi</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 16 -->
+            <div class="accordion-item">
+                <button class="accordion-trigger" lang="en"><span>Day 16 | Departure</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <button class="accordion-trigger" lang="tr"><span>16. Gün | Ayrılış</span> <svg class="trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></button>
+                <div class="accordion-content">
+                    <div class="inner-prog">
+                        <div class="prog-block">
+                            <h5 lang="en">Final</h5>
+                            <h5 lang="tr">Final</h5>
+                            <ul lang="en">
+                                <li>Lunch: <b>Sushi Arai</b></li>
+                                <li>Private transfer to Airport for flight <b>Turkish Airlines TK199</b></li>
+                            </ul>
+                            <ul lang="tr">
+                                <li>Öğle Yemeği: <b>Sushi Arai</b></li>
+                                <li><b>Türk Hava Yolları TK199</b> uçuşu için Havalimanına özel transfer</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer id="booking" class="pattern-vine">
+        <h2 class="section-title reveal" style="color: var(--accent-gold-light);" lang="en">Join Us</h2>
+        <h2 class="section-title reveal" style="color: var(--accent-gold-light);" lang="tr">Bize Katılın</h2>
+        
+        <p class="section-intro" style="color: rgba(255,255,255,0.7);" lang="en">Applications are open for our selective group of five couples. We look forward to meeting you.</p>
+        <p class="section-intro" style="color: rgba(255,255,255,0.7);" lang="tr">Beş çiftlik seçkin grubumuz için başvurular açık. Sizinle tanışmayı dört gözle bekliyoruz.</p>
+        
+        <div class="reveal">
+            <a href="mailto:hello@panoramaescapes.com" class="cta-btn" lang="en">Request Application</a>
+            <a href="mailto:hello@panoramaescapes.com" class="cta-btn" lang="tr">Başvuru Talebi</a>
+            <span class="price-tag" lang="en">Pricing Upon Request</span>
+            <span class="price-tag" lang="tr">Fiyat Bilgisi Talep Üzerine</span>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const nav = document.getElementById('nav');
+            window.addEventListener('scroll', () => {
+                if(window.scrollY > 100) nav.classList.add('scrolled');
+                else nav.classList.remove('scrolled');
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+            document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+                trigger.addEventListener('click', function() {
+                    const parent = this.parentElement;
+                    const content = parent.querySelector('.accordion-content');
+                    parent.classList.toggle('active');
+                    content.classList.toggle('open');
+                });
+            });
+
+            // Language Selector Dropdown Logic
+            const langOptions = document.querySelectorAll('.lang-option');
+            const activeLangLabel = document.getElementById('active-lang');
+
+            langOptions.forEach(opt => {
+                opt.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const lang = opt.getAttribute('data-lang');
+                    
+                    if(lang === 'tr') {
+                        document.body.classList.add('lang-tr');
+                        activeLangLabel.textContent = 'TR';
+                    } else {
+                        document.body.classList.remove('lang-tr');
+                        activeLangLabel.textContent = 'EN';
+                    }
+
+                    langOptions.forEach(o => o.classList.remove('active'));
+                    opt.classList.add('active');
+                });
+            });
+
+            const mobileToggle = document.getElementById('mobile-toggle');
+            const navLinks = document.getElementById('nav-links');
+            mobileToggle.addEventListener('click', () => {
+                mobileToggle.classList.toggle('active');
+                navLinks.classList.toggle('open');
+            });
+
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileToggle.classList.remove('active');
+                    navLinks.classList.remove('open');
+                });
+            });
+
+            // Carousel Auto-Scroll Logic
+            const carousel = document.querySelector('.carousel-wrapper');
+            let isAutoScrolling = true;
+            let scrollTimeout;
+            let scrollPos = 0;
+
+            function autoScrollCarousel() {
+                if (isAutoScrolling && carousel) {
+                    scrollPos += 0.4; // Very gentle speed
+                    carousel.scrollLeft = scrollPos;
+                    
+                    // Sync up in case of manual scroll disruption
+                    if (Math.abs(scrollPos - carousel.scrollLeft) > 2) {
+                        scrollPos = carousel.scrollLeft;
+                    }
+                    
+                    const group = document.querySelector('.carousel-group');
+                    if (group) {
+                        // Group width + the 2.5rem (40px) gap 
+                        const resetPoint = group.offsetWidth + 40; 
+                        
+                        if (carousel.scrollLeft >= resetPoint) {
+                            carousel.scrollLeft -= resetPoint;
+                            scrollPos -= resetPoint;
+                        }
+                    }
+                } else if (carousel) {
+                    scrollPos = carousel.scrollLeft; // Sync while paused
+                }
+                requestAnimationFrame(autoScrollCarousel);
+            }
+            
+            if (carousel) {
+                scrollPos = carousel.scrollLeft;
+                requestAnimationFrame(autoScrollCarousel);
+
+                const pauseScroll = () => {
+                    isAutoScrolling = false;
+                    clearTimeout(scrollTimeout);
+                    scrollPos = carousel.scrollLeft;
+                    scrollTimeout = setTimeout(() => {
+                        scrollPos = carousel.scrollLeft;
+                        isAutoScrolling = true;
+                    }, 2000); // Wait 2 seconds after manual scroll ends
+                };
+
+                carousel.addEventListener('wheel', pauseScroll, { passive: true });
+                carousel.addEventListener('touchstart', pauseScroll, { passive: true });
+                carousel.addEventListener('touchmove', pauseScroll, { passive: true });
+                carousel.addEventListener('mousedown', pauseScroll, { passive: true });
+            }
+        });
+    </script>
+</body>
+</html>
